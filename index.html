@@ -1,16 +1,16 @@
-```html id="x5p2ra"
+```html id="w3n8pk"
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Present Continuous Game</title>
 
 <style>
 
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial, sans-serif;
     background:#eef4ff;
     margin:0;
     padding:20px;
@@ -40,7 +40,7 @@ h1{
     background:#f3f7ff;
     padding:15px;
     border-radius:12px;
-    line-height:1.7;
+    line-height:1.6;
     font-size:18px;
 }
 
@@ -62,11 +62,11 @@ h1{
 
 .sentence{
     margin-top:30px;
-    font-size:30px;
+    font-size:28px;
     font-weight:bold;
     line-height:1.5;
-    color:#34495e;
     text-align:center;
+    color:#34495e;
 }
 
 .question{
@@ -78,7 +78,7 @@ h1{
 
 button{
     width:100%;
-    padding:16px;
+    padding:15px;
     margin-top:14px;
     border:none;
     border-radius:12px;
@@ -86,7 +86,6 @@ button{
     color:white;
     font-size:20px;
     cursor:pointer;
-    transition:0.2s;
 }
 
 button:hover{
@@ -114,13 +113,12 @@ button:hover{
 
 .solution{
     margin-top:15px;
-    font-size:26px;
+    font-size:24px;
     font-weight:bold;
 }
 
 .explanation{
     margin-top:15px;
-    line-height:1.6;
     font-size:18px;
 }
 
@@ -133,7 +131,6 @@ button:hover{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -145,15 +142,7 @@ button:hover{
 <h1>Present Continuous</h1>
 
 <div class="instructions">
-
 Choose the correct Present Continuous form.
-
-<br><br>
-
-Example:
-<br>
-<b>She is reading.</b>
-
 </div>
 
 <div class="score-box">
@@ -161,9 +150,7 @@ Score:
 <span id="score">0</span>
 </div>
 
-<div class="emoji" id="emoji">
-😊
-</div>
+<div class="emoji" id="emoji">😊</div>
 
 <div class="sentence" id="sentence"></div>
 
@@ -193,165 +180,72 @@ Next sentence
 
 <script>
 
-const sentenceParts = [
+const sentences = [
 
-{
-subject:"Tom",
-be:"is",
-verb:"playing",
-ending:"football now"
-},
+["Tom","is playing","football now"],
+["Anna","is reading","a book"],
+["The children","are swimming","in the pool"],
+["My dad","is cooking","dinner"],
+["We","are watching","TV"],
+["I","am doing","my homework"],
+["The dog","is sleeping","in the garden"],
+["They","are running","in the park"],
+["She","is drinking","water"],
+["You","are listening","to music"],
 
-{
-subject:"Anna",
-be:"is",
-verb:"reading",
-ending:"a book"
-},
+["My friends","are dancing","at the party"],
+["The teacher","is writing","on the board"],
+["He","is eating","a sandwich"],
+["The baby","is crying","now"],
+["We","are studying","English"],
+["The girls","are singing","a song"],
+["My mother","is cleaning","the kitchen"],
+["The boys","are jumping","in the garden"],
+["I","am drawing","a picture"],
+["Tom and Ben","are walking","to school"],
 
-{
-subject:"The children",
-be:"are",
-verb:"swimming",
-ending:"in the pool"
-},
+["The cat","is climbing","the tree"],
+["Grandma","is making","a cake"],
+["The students","are learning","new words"],
+["My brother","is playing","computer games"],
+["Dad","is washing","the car"],
+["The birds","are flying","in the sky"],
+["She","is talking","on the phone"],
+["We","are eating","pizza"],
+["The teacher","is helping","the students"],
+["I","am writing","an email"],
 
-{
-subject:"My dad",
-be:"is",
-verb:"cooking",
-ending:"dinner"
-},
+["The boys","are riding","their bikes"],
+["Anna","is wearing","a red dress"],
+["My parents","are shopping","in town"],
+["The baby","is sleeping","in the bed"],
+["The children","are laughing","loudly"],
+["Tom","is opening","the window"],
+["We","are sitting","in the classroom"],
+["The dog","is eating","its food"],
+["She","is brushing","her hair"],
+["The girls","are taking","photos"],
 
-{
-subject:"We",
-be:"are",
-verb:"watching",
-ending:"TV"
-},
-
-{
-subject:"I",
-be:"am",
-verb:"doing",
-ending:"my homework"
-},
-
-{
-subject:"The dog",
-be:"is",
-verb:"sleeping",
-ending:"in the garden"
-},
-
-{
-subject:"They",
-be:"are",
-verb:"running",
-ending:"in the park"
-},
-
-{
-subject:"She",
-be:"is",
-verb:"drinking",
-ending:"water"
-},
-
-{
-subject:"You",
-be:"are",
-verb:"listening",
-ending:"to music"
-},
-
-{
-subject:"My friends",
-be:"are",
-verb:"dancing",
-ending:"at the party"
-},
-
-{
-subject:"The teacher",
-be:"is",
-verb:"writing",
-ending:"on the board"
-},
-
-{
-subject:"He",
-be:"is",
-verb:"eating",
-ending:"a sandwich"
-},
-
-{
-subject:"The baby",
-be:"is",
-verb:"crying",
-ending:"now"
-},
-
-{
-subject:"We",
-be:"are",
-verb:"studying",
-ending:"English"
-},
-
-{
-subject:"The girls",
-be:"are",
-verb:"singing",
-ending:"a song"
-},
-
-{
-subject:"My mother",
-be:"is",
-verb:"cleaning",
-ending:"the kitchen"
-},
-
-{
-subject:"The boys",
-be:"are",
-verb:"jumping",
-ending:"in the garden"
-},
-
-{
-subject:"I",
-be:"am",
-verb:"drawing",
-ending:"a picture"
-},
-
-{
-subject:"Tom and Ben",
-be:"are",
-verb:"walking",
-ending:"to school"
-}
+["My father","is reading","the newspaper"],
+["The students","are answering","the questions"],
+["I","am carrying","my bag"],
+["The monkey","is eating","a banana"],
+["They","are playing","basketball"],
+["The teacher","is speaking","English"],
+["My sister","is listening","to the radio"],
+["The ducks","are swimming","in the lake"],
+["We","are waiting","for the bus"],
+["The boy","is kicking","the ball"]
 
 ];
 
 let score = 0;
 
 const emojis = [
-"😊",
-"😎",
-"🎉",
-"⭐",
-"👏",
-"🥳",
-"💪"
+"😊","😎","🎉","⭐","👏","🥳","💪"
 ];
 
-let currentCorrect = "";
-let currentSentence = "";
-let currentExplanation = "";
+let current = [];
 
 function randomItem(array){
     return array[Math.floor(Math.random()*array.length)];
@@ -359,11 +253,11 @@ function randomItem(array){
 
 function shuffle(array){
 
-    for(let i = array.length - 1; i > 0; i--){
+    for(let i=array.length-1; i>0; i--){
 
-        const j = Math.floor(Math.random() * (i + 1));
+        const j=Math.floor(Math.random()*(i+1));
 
-        [array[i], array[j]] = [array[j], array[i]];
+        [array[i],array[j]]=[array[j],array[i]];
     }
 
     return array;
@@ -371,47 +265,44 @@ function shuffle(array){
 
 function generateSentence(){
 
-    const item = randomItem(sentenceParts);
+    current = randomItem(sentences);
 
-    currentCorrect =
-        `${item.be} ${item.verb}`;
+    const subject = current[0];
+    const correct = current[1];
+    const ending = current[2];
+
+    const verbOnly =
+        correct.split(" ")[1];
 
     const wrong1 =
-        `${item.be} ${item.verb.replace("ing","")}`;
+        correct.split(" ")[0] + " " +
+        verbOnly.replace("ing","");
 
     const wrong2 =
-        `${item.verb}`;
-
-    currentSentence =
-        `${item.subject} ___ ${item.ending}.`;
-
-    currentExplanation =
-        `${item.subject} → use ${item.be.toUpperCase()} + verb-ing.`;
+        verbOnly;
 
     document.getElementById("sentence").innerText =
-        currentSentence;
+        `${subject} ___ ${ending}.`;
 
     const answers = shuffle([
-        currentCorrect,
+        correct,
         wrong1,
         wrong2
     ]);
 
-    let buttonsHTML = "";
+    let html = "";
 
-    answers.forEach(answer => {
+    answers.forEach(answer=>{
 
-        buttonsHTML += `
-
-            <button onclick="checkAnswer('${answer}')">
-                ${answer}
-            </button>
-
+        html += `
+        <button onclick="checkAnswer('${answer}','${correct}')">
+        ${answer}
+        </button>
         `;
     });
 
     document.getElementById("buttons").innerHTML =
-        buttonsHTML;
+        html;
 
     document.getElementById("resultBox").style.display =
         "none";
@@ -420,14 +311,14 @@ function generateSentence(){
         "none";
 }
 
-function checkAnswer(answer){
+function checkAnswer(answer,correct){
 
     const resultBox =
         document.getElementById("resultBox");
 
     resultBox.style.display = "block";
 
-    if(answer === currentCorrect){
+    if(answer===correct){
 
         score++;
 
@@ -435,21 +326,21 @@ function checkAnswer(answer){
             score;
 
         document.getElementById("emoji").innerText =
-            emojis[Math.floor(Math.random()*emojis.length)];
+            randomItem(emojis);
 
         resultBox.innerHTML = `
 
-            <div class="correct">
-                Great! 🎉
-            </div>
+        <div class="correct">
+        Great! 🎉
+        </div>
 
-            <div class="solution">
-                ${currentSentence.replace("___", currentCorrect)}
-            </div>
+        <div class="solution">
+        ${current[0]} ${correct} ${current[2]}.
+        </div>
 
-            <div class="explanation">
-                ${currentExplanation}
-            </div>
+        <div class="explanation">
+        Correct Present Continuous sentence.
+        </div>
 
         `;
 
@@ -460,17 +351,18 @@ function checkAnswer(answer){
 
         resultBox.innerHTML = `
 
-            <div class="wrong">
-                Oops! 😅
-            </div>
+        <div class="wrong">
+        Oops! 😅
+        </div>
 
-            <div class="solution">
-                ${currentSentence.replace("___", currentCorrect)}
-            </div>
+        <div class="solution">
+        ${current[0]} ${correct} ${current[2]}.
+        </div>
 
-            <div class="explanation">
-                ${currentExplanation}
-            </div>
+        <div class="explanation">
+        Remember:
+        am / is / are + verb-ing
+        </div>
 
         `;
     }
