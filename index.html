@@ -1,0 +1,414 @@
+```html id="p4x8nm"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Present Continuous Game</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#eef4ff;
+    margin:0;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+}
+
+.app{
+    width:100%;
+    max-width:600px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.instructions{
+    margin-top:15px;
+    background:#f3f7ff;
+    padding:15px;
+    border-radius:12px;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.score-box{
+    margin-top:20px;
+    background:#dfe9ff;
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.sentence{
+    margin-top:30px;
+    font-size:30px;
+    font-weight:bold;
+    line-height:1.5;
+    color:#34495e;
+    text-align:center;
+}
+
+.question{
+    margin-top:25px;
+    font-size:22px;
+    text-align:center;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    margin-top:14px;
+    border:none;
+    border-radius:12px;
+    background:#4f8cff;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#346de0;
+}
+
+.result{
+    margin-top:25px;
+    padding:18px;
+    border-radius:14px;
+    background:#eef5ff;
+}
+
+.correct{
+    color:green;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.wrong{
+    color:crimson;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.solution{
+    margin-top:15px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.explanation{
+    margin-top:15px;
+    line-height:1.6;
+    font-size:18px;
+}
+
+.next-btn{
+    background:#27ae60;
+}
+
+.next-btn:hover{
+    background:#1f8a4d;
+}
+
+.emoji{
+    font-size:40px;
+    text-align:center;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="card">
+
+<h1>Present Continuous</h1>
+
+<div class="instructions">
+
+Choose the correct Present Continuous form.
+
+<br><br>
+
+Example:
+<br>
+<b>She is reading.</b>
+
+</div>
+
+<div class="score-box">
+Score:
+<span id="score">0</span>
+</div>
+
+<div class="emoji" id="emoji">
+😊
+</div>
+
+<div class="sentence" id="sentence"></div>
+
+<div class="question">
+Choose the correct answer:
+</div>
+
+<div id="buttons"></div>
+
+<div id="resultBox"
+     class="result"
+     style="display:none;">
+</div>
+
+<button id="nextButton"
+        class="next-btn"
+        style="display:none;"
+        onclick="nextSentence()">
+
+Next sentence
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const sentences = [
+
+{
+sentence:"Tom ___ football now.",
+correct:"is playing",
+wrong1:"are playing",
+wrong2:"playing",
+explanation:"Tom = he → use IS + verb-ing."
+},
+
+{
+sentence:"The girls ___ TV.",
+correct:"are watching",
+wrong1:"is watching",
+wrong2:"watching",
+explanation:"The girls = they → use ARE + verb-ing."
+},
+
+{
+sentence:"I ___ my homework.",
+correct:"am doing",
+wrong1:"is doing",
+wrong2:"doing",
+explanation:"I → use AM + verb-ing."
+},
+
+{
+sentence:"My dog ___ in the garden.",
+correct:"is sleeping",
+wrong1:"are sleeping",
+wrong2:"sleeping",
+explanation:"My dog = it → use IS + verb-ing."
+},
+
+{
+sentence:"We ___ English.",
+correct:"are learning",
+wrong1:"is learning",
+wrong2:"learning",
+explanation:"We → use ARE + verb-ing."
+},
+
+{
+sentence:"Anna ___ a sandwich.",
+correct:"is eating",
+wrong1:"are eating",
+wrong2:"eating",
+explanation:"Anna = she → use IS + verb-ing."
+},
+
+{
+sentence:"The children ___ in the park.",
+correct:"are running",
+wrong1:"is running",
+wrong2:"running",
+explanation:"Children = they → use ARE + verb-ing."
+},
+
+{
+sentence:"You ___ very fast.",
+correct:"are speaking",
+wrong1:"is speaking",
+wrong2:"speaking",
+explanation:"You → use ARE + verb-ing."
+},
+
+{
+sentence:"Dad ___ dinner.",
+correct:"is cooking",
+wrong1:"are cooking",
+wrong2:"cooking",
+explanation:"Dad = he → use IS + verb-ing."
+},
+
+{
+sentence:"I ___ to music.",
+correct:"am listening",
+wrong1:"are listening",
+wrong2:"listening",
+explanation:"I → use AM + verb-ing."
+}
+
+];
+
+let currentSentence = {};
+let score = 0;
+
+const emojis = [
+"😊",
+"😎",
+"🎉",
+"⭐",
+"👏",
+"🥳",
+"💪"
+];
+
+function randomSentence(){
+    return sentences[Math.floor(Math.random()*sentences.length)];
+}
+
+function shuffle(array){
+
+    for(let i = array.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+}
+
+function generateSentence(){
+
+    currentSentence = randomSentence();
+
+    document.getElementById("sentence").innerText =
+        currentSentence.sentence;
+
+    const answers = shuffle([
+        currentSentence.correct,
+        currentSentence.wrong1,
+        currentSentence.wrong2
+    ]);
+
+    let buttonsHTML = "";
+
+    answers.forEach(answer => {
+
+        buttonsHTML += `
+
+            <button onclick="checkAnswer('${answer}')">
+                ${answer}
+            </button>
+
+        `;
+    });
+
+    document.getElementById("buttons").innerHTML =
+        buttonsHTML;
+
+    document.getElementById("resultBox").style.display =
+        "none";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+}
+
+function checkAnswer(answer){
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    if(answer === currentSentence.correct){
+
+        score++;
+
+        document.getElementById("score").innerText =
+            score;
+
+        document.getElementById("emoji").innerText =
+            emojis[Math.floor(Math.random()*emojis.length)];
+
+        resultBox.innerHTML = `
+
+            <div class="correct">
+                Great! 🎉
+            </div>
+
+            <div class="solution">
+                ${currentSentence.sentence.replace("___", currentSentence.correct)}
+            </div>
+
+            <div class="explanation">
+                ${currentSentence.explanation}
+            </div>
+
+        `;
+
+    } else {
+
+        document.getElementById("emoji").innerText =
+            "😅";
+
+        resultBox.innerHTML = `
+
+            <div class="wrong">
+                Oops! 😅
+            </div>
+
+            <div class="solution">
+                ${currentSentence.sentence.replace("___", currentSentence.correct)}
+            </div>
+
+            <div class="explanation">
+                ${currentSentence.explanation}
+            </div>
+
+        `;
+    }
+
+    document.getElementById("nextButton").style.display =
+        "block";
+}
+
+function nextSentence(){
+    generateSentence();
+}
+
+generateSentence();
+
+</script>
+
+</body>
+</html>
+```
