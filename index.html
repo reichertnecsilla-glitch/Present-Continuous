@@ -1,4 +1,4 @@
-```html id="p4x8nm"
+```html id="d8m3qp"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,6 +52,12 @@ h1{
     text-align:center;
     font-size:22px;
     font-weight:bold;
+}
+
+.emoji{
+    font-size:40px;
+    text-align:center;
+    margin-top:10px;
 }
 
 .sentence{
@@ -126,12 +132,6 @@ button:hover{
     background:#1f8a4d;
 }
 
-.emoji{
-    font-size:40px;
-    text-align:center;
-    margin-top:10px;
-}
-
 </style>
 
 </head>
@@ -193,91 +193,67 @@ Next sentence
 
 <script>
 
-const sentences = [
+const subjects = [
 
-{
-sentence:"Tom ___ football now.",
-correct:"is playing",
-wrong1:"are playing",
-wrong2:"playing",
-explanation:"Tom = he → use IS + verb-ing."
-},
-
-{
-sentence:"The girls ___ TV.",
-correct:"are watching",
-wrong1:"is watching",
-wrong2:"watching",
-explanation:"The girls = they → use ARE + verb-ing."
-},
-
-{
-sentence:"I ___ my homework.",
-correct:"am doing",
-wrong1:"is doing",
-wrong2:"doing",
-explanation:"I → use AM + verb-ing."
-},
-
-{
-sentence:"My dog ___ in the garden.",
-correct:"is sleeping",
-wrong1:"are sleeping",
-wrong2:"sleeping",
-explanation:"My dog = it → use IS + verb-ing."
-},
-
-{
-sentence:"We ___ English.",
-correct:"are learning",
-wrong1:"is learning",
-wrong2:"learning",
-explanation:"We → use ARE + verb-ing."
-},
-
-{
-sentence:"Anna ___ a sandwich.",
-correct:"is eating",
-wrong1:"are eating",
-wrong2:"eating",
-explanation:"Anna = she → use IS + verb-ing."
-},
-
-{
-sentence:"The children ___ in the park.",
-correct:"are running",
-wrong1:"is running",
-wrong2:"running",
-explanation:"Children = they → use ARE + verb-ing."
-},
-
-{
-sentence:"You ___ very fast.",
-correct:"are speaking",
-wrong1:"is speaking",
-wrong2:"speaking",
-explanation:"You → use ARE + verb-ing."
-},
-
-{
-sentence:"Dad ___ dinner.",
-correct:"is cooking",
-wrong1:"are cooking",
-wrong2:"cooking",
-explanation:"Dad = he → use IS + verb-ing."
-},
-
-{
-sentence:"I ___ to music.",
-correct:"am listening",
-wrong1:"are listening",
-wrong2:"listening",
-explanation:"I → use AM + verb-ing."
-}
+{subject:"I", be:"am"},
+{subject:"You", be:"are"},
+{subject:"We", be:"are"},
+{subject:"They", be:"are"},
+{subject:"He", be:"is"},
+{subject:"She", be:"is"},
+{subject:"Tom", be:"is"},
+{subject:"Anna", be:"is"},
+{subject:"My dad", be:"is"},
+{subject:"The children", be:"are"},
+{subject:"The dog", be:"is"}
 
 ];
 
-let currentSentence = {};
+const verbs = [
+
+"play",
+"eat",
+"sleep",
+"watch",
+"read",
+"cook",
+"run",
+"drink",
+"write",
+"listen",
+"study",
+"sing",
+"dance",
+"jump",
+"swim",
+"clean",
+"draw",
+"walk",
+"talk",
+"work"
+
+];
+
+const objects = [
+
+"football",
+"TV",
+"a book",
+"dinner",
+"music",
+"in the park",
+"at school",
+"homework",
+"water",
+"a sandwich",
+"in the garden",
+"English",
+"fast",
+"on the phone",
+"pictures"
+
+];
+
 let score = 0;
 
 const emojis = [
@@ -290,8 +266,21 @@ const emojis = [
 "💪"
 ];
 
-function randomSentence(){
-    return sentences[Math.floor(Math.random()*sentences.length)];
+let currentCorrect = "";
+let currentSentence = "";
+let currentExplanation = "";
+
+function randomItem(array){
+    return array[Math.floor(Math.random()*array.length)];
+}
+
+function makeIng(verb){
+
+    if(verb.endsWith("e") && verb !== "be"){
+        return verb.slice(0,-1) + "ing";
+    }
+
+    return verb + "ing";
 }
 
 function shuffle(array){
@@ -308,15 +297,36 @@ function shuffle(array){
 
 function generateSentence(){
 
-    currentSentence = randomSentence();
+    const person = randomItem(subjects);
+
+    const verb = randomItem(verbs);
+
+    const object = randomItem(objects);
+
+    const ingVerb = makeIng(verb);
+
+    currentCorrect =
+        `${person.be} ${ingVerb}`;
+
+    const wrong1 =
+        `${person.be} ${verb}`;
+
+    const wrong2 =
+        `${ingVerb}`;
+
+    currentSentence =
+        `${person.subject} ___ ${object}.`;
+
+    currentExplanation =
+        `${person.subject} → use ${person.be.toUpperCase()} + verb-ing.`;
 
     document.getElementById("sentence").innerText =
-        currentSentence.sentence;
+        currentSentence;
 
     const answers = shuffle([
-        currentSentence.correct,
-        currentSentence.wrong1,
-        currentSentence.wrong2
+        currentCorrect,
+        wrong1,
+        wrong2
     ]);
 
     let buttonsHTML = "";
@@ -349,7 +359,7 @@ function checkAnswer(answer){
 
     resultBox.style.display = "block";
 
-    if(answer === currentSentence.correct){
+    if(answer === currentCorrect){
 
         score++;
 
@@ -366,11 +376,11 @@ function checkAnswer(answer){
             </div>
 
             <div class="solution">
-                ${currentSentence.sentence.replace("___", currentSentence.correct)}
+                ${currentSentence.replace("___", currentCorrect)}
             </div>
 
             <div class="explanation">
-                ${currentSentence.explanation}
+                ${currentExplanation}
             </div>
 
         `;
@@ -387,11 +397,11 @@ function checkAnswer(answer){
             </div>
 
             <div class="solution">
-                ${currentSentence.sentence.replace("___", currentSentence.correct)}
+                ${currentSentence.replace("___", currentCorrect)}
             </div>
 
             <div class="explanation">
-                ${currentSentence.explanation}
+                ${currentExplanation}
             </div>
 
         `;
@@ -412,3 +422,4 @@ generateSentence();
 </body>
 </html>
 ```
+
