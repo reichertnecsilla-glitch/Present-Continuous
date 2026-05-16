@@ -1,4 +1,4 @@
-```html id="d8m3qp"
+```html id="x5p2ra"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,64 +193,147 @@ Next sentence
 
 <script>
 
-const subjects = [
+const sentenceParts = [
 
-{subject:"I", be:"am"},
-{subject:"You", be:"are"},
-{subject:"We", be:"are"},
-{subject:"They", be:"are"},
-{subject:"He", be:"is"},
-{subject:"She", be:"is"},
-{subject:"Tom", be:"is"},
-{subject:"Anna", be:"is"},
-{subject:"My dad", be:"is"},
-{subject:"The children", be:"are"},
-{subject:"The dog", be:"is"}
+{
+subject:"Tom",
+be:"is",
+verb:"playing",
+ending:"football now"
+},
 
-];
+{
+subject:"Anna",
+be:"is",
+verb:"reading",
+ending:"a book"
+},
 
-const verbs = [
+{
+subject:"The children",
+be:"are",
+verb:"swimming",
+ending:"in the pool"
+},
 
-"play",
-"eat",
-"sleep",
-"watch",
-"read",
-"cook",
-"run",
-"drink",
-"write",
-"listen",
-"study",
-"sing",
-"dance",
-"jump",
-"swim",
-"clean",
-"draw",
-"walk",
-"talk",
-"work"
+{
+subject:"My dad",
+be:"is",
+verb:"cooking",
+ending:"dinner"
+},
 
-];
+{
+subject:"We",
+be:"are",
+verb:"watching",
+ending:"TV"
+},
 
-const objects = [
+{
+subject:"I",
+be:"am",
+verb:"doing",
+ending:"my homework"
+},
 
-"football",
-"TV",
-"a book",
-"dinner",
-"music",
-"in the park",
-"at school",
-"homework",
-"water",
-"a sandwich",
-"in the garden",
-"English",
-"fast",
-"on the phone",
-"pictures"
+{
+subject:"The dog",
+be:"is",
+verb:"sleeping",
+ending:"in the garden"
+},
+
+{
+subject:"They",
+be:"are",
+verb:"running",
+ending:"in the park"
+},
+
+{
+subject:"She",
+be:"is",
+verb:"drinking",
+ending:"water"
+},
+
+{
+subject:"You",
+be:"are",
+verb:"listening",
+ending:"to music"
+},
+
+{
+subject:"My friends",
+be:"are",
+verb:"dancing",
+ending:"at the party"
+},
+
+{
+subject:"The teacher",
+be:"is",
+verb:"writing",
+ending:"on the board"
+},
+
+{
+subject:"He",
+be:"is",
+verb:"eating",
+ending:"a sandwich"
+},
+
+{
+subject:"The baby",
+be:"is",
+verb:"crying",
+ending:"now"
+},
+
+{
+subject:"We",
+be:"are",
+verb:"studying",
+ending:"English"
+},
+
+{
+subject:"The girls",
+be:"are",
+verb:"singing",
+ending:"a song"
+},
+
+{
+subject:"My mother",
+be:"is",
+verb:"cleaning",
+ending:"the kitchen"
+},
+
+{
+subject:"The boys",
+be:"are",
+verb:"jumping",
+ending:"in the garden"
+},
+
+{
+subject:"I",
+be:"am",
+verb:"drawing",
+ending:"a picture"
+},
+
+{
+subject:"Tom and Ben",
+be:"are",
+verb:"walking",
+ending:"to school"
+}
 
 ];
 
@@ -274,15 +357,6 @@ function randomItem(array){
     return array[Math.floor(Math.random()*array.length)];
 }
 
-function makeIng(verb){
-
-    if(verb.endsWith("e") && verb !== "be"){
-        return verb.slice(0,-1) + "ing";
-    }
-
-    return verb + "ing";
-}
-
 function shuffle(array){
 
     for(let i = array.length - 1; i > 0; i--){
@@ -297,28 +371,22 @@ function shuffle(array){
 
 function generateSentence(){
 
-    const person = randomItem(subjects);
-
-    const verb = randomItem(verbs);
-
-    const object = randomItem(objects);
-
-    const ingVerb = makeIng(verb);
+    const item = randomItem(sentenceParts);
 
     currentCorrect =
-        `${person.be} ${ingVerb}`;
+        `${item.be} ${item.verb}`;
 
     const wrong1 =
-        `${person.be} ${verb}`;
+        `${item.be} ${item.verb.replace("ing","")}`;
 
     const wrong2 =
-        `${ingVerb}`;
+        `${item.verb}`;
 
     currentSentence =
-        `${person.subject} ___ ${object}.`;
+        `${item.subject} ___ ${item.ending}.`;
 
     currentExplanation =
-        `${person.subject} → use ${person.be.toUpperCase()} + verb-ing.`;
+        `${item.subject} → use ${item.be.toUpperCase()} + verb-ing.`;
 
     document.getElementById("sentence").innerText =
         currentSentence;
@@ -422,4 +490,3 @@ generateSentence();
 </body>
 </html>
 ```
-
